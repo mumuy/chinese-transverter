@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>中文简体繁体转换器</title>
+		<link rel="shortcut icon" href="/public/img/favicon.png">
+		<style type="text/css">
+			body{
+				font-size:12px;
+				font-family: "Microsoft Yahei",Arial,Helvetica;
+			}
+			button,input{
+				margin-right: 10px;
+				font-family: "Microsoft Yahei",Arial,Helvetica;
+			}
+			.container{
+				width:640px;
+				margin:0 auto 15px;
+			}
+			textarea{
+				display: block;
+				width:100%;
+				height:320px;
+			}
+			.copy{
+				width:1200px;
+				margin:0 auto;
+				text-align:center;
+				color:#666;
+			}
+			.copy a{
+				color:#666;
+				text-decoration:none;
+			}
+			.copy a:hover{
+				text-decoration:underline;
+			}
+		</style>
+		<script type="text/javascript" src="transverter.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<p>输入内容：</p>
+			<p>
+				<textarea id="content"></textarea>
+			</p>
+			<p><button id="simplified">转成简体中文</button><button id="traditional">转成繁体中文</button>
+			<p>转换结果：</p>
+			<p>
+				<textarea id="reslut"></textarea>
+			</p>
+		</div>
+		<div class="copy">&copy; <a href="http://www.passer-by.com" target="_blank">passer-by.com</a></div>
+		<script type="text/javascript">
+			var $content = document.getElementById('content');
+			var $reslut = document.getElementById('reslut');
+			document.getElementById('simplified').onclick = function(){
+				console.log('simplified');
+				$reslut.value = transverter('simplified',$content.value); 
+			}
+			document.getElementById('traditional').onclick = function(){
+				console.log('traditional');
+				$reslut.value = transverter('traditional',$content.value); 
+			}
+		</script>
+	</body>
+</html>
