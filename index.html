@@ -20,7 +20,8 @@
 			textarea{
 				display: block;
 				width:100%;
-				height:320px;
+				height:240px;
+				resize:none;
 			}
 			.copy{
 				width:1200px;
@@ -44,6 +45,11 @@
 			<p>
 				<textarea id="content"></textarea>
 			</p>
+			<p>
+				地区：
+				<label for="field1"><input id="field1" type="radio" name="language" value="" checked>无</label>
+				<label for="field2"><input id="field2" type="radio" name="language" value="zh_TW">台湾</label>
+			</p>
 			<p><button id="simplified">转成简体中文</button><button id="traditional">转成繁体中文</button>
 			<p>转换结果：</p>
 			<p>
@@ -52,15 +58,24 @@
 		</div>
 		<div class="copy">&copy; <a href="http://www.passer-by.com" target="_blank">passer-by.com</a></div>
 		<script type="text/javascript">
+			var $language = document.getElementsByName('language');
 			var $content = document.getElementById('content');
 			var $reslut = document.getElementById('reslut');
 			document.getElementById('simplified').onclick = function(){
-				console.log('simplified');
-				$reslut.value = transverter('simplified',$content.value); 
+				var language = $language[1].checked?'zh_TW':'';
+				$reslut.value = transverter({
+					type:'simplified',
+					str:$content.value,
+					language:language
+				});
 			}
 			document.getElementById('traditional').onclick = function(){
-				console.log('traditional');
-				$reslut.value = transverter('traditional',$content.value); 
+				var language = $language[1].checked?'zh_TW':'';
+				$reslut.value = transverter({
+					type:'traditional',
+					str:$content.value,
+					language:language
+				});
 			}
 		</script>
 	</body>
