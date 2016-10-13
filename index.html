@@ -7,11 +7,10 @@
 		<style type="text/css">
 			html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h3,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h3,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%}legend{color:#000}
 			body{
-				font-size:12px;
+				font-size:14px;
 				font-family: "Microsoft Yahei",Arial,Helvetica;
 			}
 			button,input{
-				margin-right: 10px;
 				font-family: "Microsoft Yahei",Arial,Helvetica;
 			}
 			.mod-panel{
@@ -33,6 +32,12 @@
 			}
 			.mod-panel .bd p{
 				line-height: 30px;
+			}
+			.mod-panel label{
+				margin-right: 20px;
+			}
+			.mod-panel button{
+				margin-right: 10px;
 			}
 			.mod-panel textarea{
 				display: block;
@@ -67,6 +72,11 @@
 					<p>
 						<textarea id="content"></textarea>
 					</p>
+					<p>
+						地区：
+						<label for="field1"><input id="field1" type="radio" name="language" value="" checked> 无</label>
+						<label for="field2"><input id="field2" type="radio" name="language" value="zh_TW"> 台湾</label>
+					</p>
 					<p><button id="simplified">转成简体中文</button><button id="traditional">转成繁体中文</button>
 					<p>转换结果：</p>
 					<p>
@@ -83,15 +93,24 @@
 			</div>
 		</div>
 		<script type="text/javascript">
+			var $language = document.getElementsByName('language');
 			var $content = document.getElementById('content');
 			var $reslut = document.getElementById('reslut');
 			document.getElementById('simplified').onclick = function(){
-				console.log('simplified');
-				$reslut.value = transverter('simplified',$content.value); 
+				var language = $language[1].checked?'zh_TW':'';
+				$reslut.value = transverter({
+					type:'simplified',
+					str:$content.value,
+					language:language
+				});
 			}
 			document.getElementById('traditional').onclick = function(){
-				console.log('traditional');
-				$reslut.value = transverter('traditional',$content.value); 
+				var language = $language[1].checked?'zh_TW':'';
+				$reslut.value = transverter({
+					type:'traditional',
+					str:$content.value,
+					language:language
+				});
 			}
 		</script>
 		<script async defer src="https://buttons.github.io/buttons.js"></script>
