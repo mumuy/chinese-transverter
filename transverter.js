@@ -5,7 +5,9 @@
 	traditional_chinese += '佔恆緻徵摺嚮捨仟纍睏骯闆錶採桿瑯貍剎臺兇巖癥註著錛鑌鋮釧鐨搟睪鎵鉅鏝麼鈮鯰鎩謔蕓鍾壠咤徬餘寧橰飈霤鍩鍀鍃鎇麯';
 	var words = {
 		'台风':'颱风',
-		'度假':'渡假'
+		'度假':'渡假',
+		'历史':'歷史',
+		'头发':'頭髮',
 	};
 	var zh_TW = {
 		'熊猫':'猫熊',
@@ -320,9 +322,7 @@
 		'襬':'摆',
 		'滷':'卤',
 		'儘':'尽',
-		'歷':'历',
 		'噹':'当',
-		'髮':'发',
 		'彙':'汇',
 		'滙':'汇',
 		'檯':'台',
@@ -376,10 +376,10 @@
 		if(options['type']=='traditional'){
 			source = simplified_chinese;
 			target = traditional_chinese;
-			for(var i in words){
+			for(var i in words){  //固定词替换
 				str = options['str'].replace(i,words[i]);
 			}
-			if(options['language']=='zh_TW'){
+			if(options['language']=='zh_TW'){  //惯用词替换：简->繁
 				for(var i in zh_TW){
 					if(options['str'].indexOf(i)>-1){
 						str = options['str'].replace(new RegExp(i,'g'),zh_TW[i]);
@@ -389,7 +389,7 @@
 		}else{
 			source = traditional_chinese;
 			target = simplified_chinese;
-			for(var i in words){
+			for(var i in words){  //固定词替换
 				str = options['str'].replace(words[i],i);
 			}
 			for(i in toSimplified){
@@ -409,7 +409,7 @@
 			result += c;
 		}
 		if(options['type']=='simplified'){
-			if(options['language']=='zh_TW'){
+			if(options['language']=='zh_TW'){  //惯用词替换：繁->简
 				for(var i in zh_TW){
 					if(result.indexOf(zh_TW[i])>-1){
 						result = result.replace(new RegExp(zh_TW[i],'g'),i);
