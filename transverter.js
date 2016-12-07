@@ -8,8 +8,12 @@
 		'度假':'渡假',
 		'历史':'歷史',
 		'头发':'頭髮',
+		'通奸':'通姦',
+		'强奸':'强姦',
+		'激荡':'激盪'
 	};
 	var zh_TW = {
+		'圣诞':'耶诞',
 		'熊猫':'猫熊',
 		'美女':'正妹',
 		'大爆炸':'大霹雳',
@@ -391,10 +395,14 @@
 			source = traditional_chinese;
 			target = simplified_chinese;
 			for(var i in words){  //固定词替换
-				options['str'] = options['str'].replace(words[i],i);
+				if(options['str'].indexOf(words[i])>-1){
+					options['str'] = options['str'].replace(new RegExp(words[i],'g'),i);
+				}
 			}
-			for(i in toSimplified){
-				options['str'] = options['str'].replace(i,toSimplified[i]);
+			for(i in toSimplified){	//单向替换：繁->简
+				if(options['str'].indexOf(i)>-1){
+					options['str'] = options['str'].replace(new RegExp(i,'g'),toSimplified[i]);
+				}
 			}
 		}
 		for(var i=0,len=options['str'].length;i<len;i++){
