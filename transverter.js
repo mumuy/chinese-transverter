@@ -315,6 +315,7 @@
 		'想干什么':'你想怎样'
 	};
 	var toSimplified = {
+		'溼':'湿',
 		'鋂':'镅',
 		'甯':'宁',
 		'妳':'你',
@@ -377,12 +378,12 @@
 			source = simplified_chinese;
 			target = traditional_chinese;
 			for(var i in words){  //固定词替换
-				str = options['str'].replace(i,words[i]);
+				options['str'] = options['str'].replace(i,words[i]);
 			}
 			if(options['language']=='zh_TW'){  //惯用词替换：简->繁
 				for(var i in zh_TW){
 					if(options['str'].indexOf(i)>-1){
-						str = options['str'].replace(new RegExp(i,'g'),zh_TW[i]);
+						options['str'] = options['str'].replace(new RegExp(i,'g'),zh_TW[i]);
 					}
 				}
 			}
@@ -390,14 +391,14 @@
 			source = traditional_chinese;
 			target = simplified_chinese;
 			for(var i in words){  //固定词替换
-				str = options['str'].replace(words[i],i);
+				options['str'] = options['str'].replace(words[i],i);
 			}
 			for(i in toSimplified){
-				str = options['str'].replace(i,toSimplified[i]);
+				options['str'] = options['str'].replace(i,toSimplified[i]);
 			}
 		}
 		for(var i=0,len=options['str'].length;i<len;i++){
-			var c = str[i];
+			var c = options['str'][i];
 			if(hash[c]){
 				c = hash[c];
 			}else{
